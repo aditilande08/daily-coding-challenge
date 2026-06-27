@@ -17,7 +17,8 @@ def get_extension(lang):
         'cpp': 'cpp',
         'java': 'java',
         'js': 'js',
-        'md': 'md'
+        'md': 'md',
+        'sql': 'sql'
     }
     return extensions.get(lang, 'txt')
 
@@ -26,6 +27,8 @@ def get_comment_chars(lang):
         return '# ', ' #'
     elif lang in ['md']:
         return '<!-- ', ' -->'
+    elif lang in ['sql']:
+        return '-- ', ' --'
     else:
         return '// ', ' //'
 

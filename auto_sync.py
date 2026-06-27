@@ -67,13 +67,21 @@ def get_extension(lang):
         'cpp': 'cpp',
         'java': 'java',
         'javascript': 'js',
-        'typescript': 'ts'
+        'typescript': 'ts',
+        'mysql': 'sql',
+        'mssql': 'sql',
+        'oraclesql': 'sql',
+        'postgresql': 'sql',
+        'sql': 'sql'
     }
     return extensions.get(lang.lower(), 'py')
 
 def get_comment_chars(lang):
-    if lang.lower() in ['python', 'python3', 'py']:
+    lang_lower = lang.lower()
+    if lang_lower in ['python', 'python3', 'py']:
         return '# ', ' #'
+    elif lang_lower in ['mysql', 'mssql', 'oraclesql', 'postgresql', 'sql']:
+        return '-- ', ' --'
     else:
         return '// ', ' //'
 
