@@ -16,13 +16,16 @@ def get_extension(lang):
         'py': 'py',
         'cpp': 'cpp',
         'java': 'java',
-        'js': 'js'
+        'js': 'js',
+        'md': 'md'
     }
     return extensions.get(lang, 'txt')
 
 def get_comment_chars(lang):
     if lang in ['py']:
         return '# ', ' #'
+    elif lang in ['md']:
+        return '<!-- ', ' -->'
     else:
         return '// ', ' //'
 
@@ -31,20 +34,21 @@ def update_readme(platform, difficulty, title, url, filepath):
     date_str = datetime.now().strftime('%Y-%m-%d')
     
     # Header format
-    header = """# Daily Coding Challenges Tracker ⚡
+    header = """# Daily Coding Challenges & Learning Tracker ⚡
 
-A repository tracking my daily problem solving across various platforms. Built with [CodeStreak](file:///C:/Users/aditi/.gemini/antigravity-ide/scratch/code-streak-tracker/index.html).
+A repository tracking my daily problem solving and notes. Built with [CodeStreak](index.html).
 
 ## 📊 Summary Statistics
 - **LeetCode**: {leetcode_count}
 - **CodeChef**: {codechef_count}
 - **GeeksforGeeks**: {gfg_count}
 - **HackerRank**: {hr_count}
+- **Today I Learned (TIL)**: {til_count}
 
-## 🏆 Problem Log
+## 🏆 Activity Log
 
-| Date | Platform | Title | Difficulty | Solution Link |
-|------|----------|-------|------------|---------------|
+| Date | Platform | Title | Difficulty / Topic | Solution / Note Link |
+|------|----------|-------|--------------------|----------------------|
 """
     
     # Read existing entries
@@ -52,8 +56,7 @@ A repository tracking my daily problem solving across various platforms. Built w
     if os.path.exists(readme_path):
         with open(readme_path, 'r', encoding='utf-8') as f:
             content = f.read()
-            # Extract existing rows from table
-            matches = re.findall(r'\| (\d{{4}}-\d{{2}}-\d{{2}}) \| ([^|]+) \| ([^|]+) \| ([^|]+) \| \[Solution\]\(([^)]+)\) \|', content)
+            matches = re.findall(r'\| (\d{4}-\d{2}-\d{2}) \| ([^|]+) \| ([^|]+) \| ([^|]+) \| \[Link\]\(([^)]+)\) \|', content)
             for m in matches:
                 entries.append({
                     'date': m[0].strip(),
@@ -64,10 +67,11 @@ A repository tracking my daily problem solving across various platforms. Built w
                 })
     
     # Add new entry
+    clean_title = f"[{title}]({url})" if url and url.startswith('http') else title
     new_entry = {
         'date': date_str,
-        'platform': platform.capitalize(),
-        'title': f"[{title}]({url})",
+        'platform': platform.capitalize() if platform != 'til' else 'TIL',
+        'title': clean_title,
         'difficulty': difficulty.capitalize(),
         'filepath': filepath.replace('\\', '/')
     }
@@ -77,7 +81,7 @@ A repository tracking my daily problem solving across various platforms. Built w
         entries.insert(0, new_entry) # Insert at top
         
     # Recalculate counts
-    counts = {'leetcode': 0, 'codechef': 0, 'geeksforgeeks': 0, 'hackerrank': 0}
+    counts = {'leetcode': 0, 'codechef': 0, 'geeksforgeeks': 0, 'hackerrank': 0, 'til': 0}
     for e in entries:
         plat_lower = e['platform'].lower()
         if plat_lower in counts:
@@ -87,13 +91,14 @@ A repository tracking my daily problem solving across various platforms. Built w
         leetcode_count=counts['leetcode'],
         codechef_count=counts['codechef'],
         gfg_count=counts['geeksforgeeks'],
-        hr_count=counts['hackerrank']
+        hr_count=counts['hackerrank'],
+        til_count=counts['til']
     )
     
     # Generate table rows
     table_rows = []
     for e in entries:
-        table_rows.append(f"| {e['date']} | {e['platform']} | {e['title']} | {e['difficulty']} | [Solution]({e['filepath']}) |")
+        table_rows.append(f"| {e['date']} | {e['platform']} | {e['title']} | {e['difficulty']} | [Link]({e['filepath']}) |")
         
     with open(readme_path, 'w', encoding='utf-8') as f:
         f.write(header_filled + '\n'.join(table_rows))
@@ -106,7 +111,7 @@ def run_git(file_path):
             print("Initialized local Git repository.")
             
         subprocess.run(['git', 'add', file_path, 'README.md'], check=True)
-        commit_msg = f"Solve: {file_path.split(os.sep)[-1]}"
+        commit_msg = f"Solve/Note: {file_path.split(os.sep)[-1]}"
         subprocess.run(['git', 'commit', '-m', commit_msg], check=True)
         print(f"\n[SUCCESS] Successfully committed {file_path} to your local repository!")
         print("💡 Run 'git push' to push this commit to your GitHub profile and light up your contribution graph!")
@@ -115,11 +120,11 @@ def run_git(file_path):
 
 def main():
     parser = argparse.ArgumentParser(description="Sync challenges to your git repo.")
-    parser.add_argument('--title', required=True, help="Title of the coding challenge")
-    parser.add_argument('--platform', required=True, help="leetcode, codechef, geeksforgeeks, hackerrank")
-    parser.add_argument('--url', required=True, help="URL to the challenge page")
-    parser.add_argument('--difficulty', required=True, help="easy, medium, hard")
-    parser.add_argument('--lang', required=True, help="py, cpp, java, js")
+    parser.add_argument('--title', required=True, help="Title of the coding challenge or TIL topic")
+    parser.add_argument('--platform', required=True, help="leetcode, codechef, geeksforgeeks, hackerrank, til")
+    parser.add_argument('--url', required=True, help="URL to the challenge page or N/A")
+    parser.add_argument('--difficulty', required=True, help="easy, medium, hard or topic category")
+    parser.add_argument('--lang', required=True, help="py, cpp, java, js, md")
     parser.add_argument('--code', required=True, help="Base64 encoded source code")
     
     args = parser.parse_args()
@@ -133,27 +138,30 @@ def main():
         sys.exit(1)
         
     # Setup target paths
-    platform_dir = slugify(args.platform)
-    diff_dir = slugify(args.difficulty)
-    target_dir = os.path.join('solutions', platform_dir, diff_dir)
+    if args.platform.lower() == 'til':
+        target_dir = 'til'
+        filename = f"{slugify(args.title)}.md"
+        full_path = os.path.join(target_dir, filename)
+    else:
+        platform_dir = slugify(args.platform)
+        diff_dir = slugify(args.difficulty)
+        target_dir = os.path.join('solutions', platform_dir, diff_dir)
+        file_ext = get_extension(args.lang)
+        filename = f"{slugify(args.title)}.{file_ext}"
+        full_path = os.path.join(target_dir, filename)
     
     if not os.path.exists(target_dir):
         os.makedirs(target_dir)
         
-    # Create filename
-    file_ext = get_extension(args.lang)
-    filename = f"{slugify(args.title)}.{file_ext}"
-    full_path = os.path.join(target_dir, filename)
-    
     # Prep comments
-    c_start, c_end = get_comment_chars(args.lang)
+    c_start, c_end = get_comment_chars(args.lang if args.platform.lower() != 'til' else 'md')
     
-    file_content = f"""{c_start}Platform: {args.platform.capitalize()}
-{c_start}Problem: {args.title}
-{c_start}Difficulty: {args.difficulty.capitalize()}
-{c_start}Link: {args.url}
-{c_start}Date Solved: {datetime.now().strftime('%Y-%m-%d')}
-
+    file_content = f"""{c_start}Platform: {args.platform.upper()}
+{c_start}Topic/Problem: {args.title}
+{c_start}Difficulty/Category: {args.difficulty.capitalize()}
+{c_start}Link/Reference: {args.url}
+{c_start}Date Solved/Logged: {datetime.now().strftime('%Y-%m-%d')}
+{c_end if args.platform.lower() == 'til' else ''}
 """ + source_code
     
     # Write solution file
