@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeStreak Tracker | Real GitHub Graph Builder</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-area">
+                <span class="logo-icon">⚡</span>
+                <h1>Code<span>Streak</span></h1>
+            </div>
+            <p class="subtitle">Turn daily coding consistency into real GitHub green dots.</p>
+        </header>
+
+        <!-- Main Layout -->
+        <div class="dashboard-grid">
+            
+            <!-- Left Side: Stats and Platform Advice -->
+            <aside class="sidebar">
+                <!-- Streak Card -->
+                <div class="glass-card streak-card">
+                    <div class="streak-header">
+                        <h3>Active Streak</h3>
+                        <span class="streak-badge">🔥 Consistent</span>
+                    </div>
+                    <div class="streak-number" id="streak-days">0</div>
+                    <p class="streak-desc">Days in a row. Keep the momentum going!</p>
+                    <div class="streak-bar-container">
+                        <div class="streak-bar" id="streak-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Progress Breakdown -->
+                <div class="glass-card stats-card">
+                    <h3>Problem Breakdown</h3>
+                    <div class="circular-progress-box">
+                        <svg class="progress-ring" width="120" height="120">
+                            <circle class="progress-ring__circle-bg" stroke="#1b243b" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                            <circle class="progress-ring__circle" id="total-progress-ring" stroke="#00f2fe" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                        </svg>
+                        <div class="progress-ring-text">
+                            <span class="num" id="total-solved">0</span>
+                            <span class="label">Solved</span>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-bars">
+                        <div class="diff-item easy">
+                            <div class="diff-info">
+                                <span>Easy</span>
+                                <span id="easy-count">0</span>
+                            </div>
+                            <div class="diff-bar"><div class="fill" id="easy-bar" style="width: 0%"></div></div>
+                        </div>
+                        <div class="diff-item medium">
+                            <div class="diff-info">
+                                <span>Medium</span>
+                                <span id="medium-count">0</span>
+                            </div>
+                            <div class="diff-bar"><div class="fill" id="medium-bar" style="width: 0%"></div></div>
+                        </div>
+                        <div class="diff-item hard">
+                            <div class="diff-info">
+                                <span>Hard</span>
+                                <span id="hard-count">0</span>
+                            </div>
+                            <div class="diff-bar"><div class="fill" id="hard-bar" style="width: 0%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Platform Recommendations Card -->
+                <div class="glass-card recommendation-card">
+                    <h3>Platform Roadmap</h3>
+                    <div class="platform-list">
+                        <div class="platform-item active-platform">
+                            <span class="p-icon">💻</span>
+                            <div class="p-details">
+                                <strong>LeetCode</strong>
+                                <p>Standard for interview questions and Data Structures & Algorithms.</p>
+                            </div>
+                        </div>
+                        <div class="platform-item">
+                            <span class="p-icon">👨‍🍳</span>
+                            <div class="p-details">
+                                <strong>CodeChef</strong>
+                                <p>Excellent for competitive programming and fast speed contests.</p>
+                            </div>
+                        </div>
+                        <div class="platform-item">
+                            <span class="p-icon">🎯</span>
+                            <div class="p-details">
+                                <strong>GeeksforGeeks</strong>
+                                <p>Daily POTD and comprehensive articles for core topics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right Side: Action Panel / Logger -->
+            <main class="main-content">
+                <div class="glass-card input-card">
+                    <h2>Log Daily Challenge</h2>
+                    <p class="section-desc">Record your code to generate the local commit sync command.</p>
+                    
+                    <form id="challenge-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="problem-title">Problem Title</label>
+                                <input type="text" id="problem-title" placeholder="e.g. Two Sum" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="problem-platform">Platform</label>
+                                <select id="problem-platform" required>
+                                    <option value="leetcode">LeetCode</option>
+                                    <option value="codechef">CodeChef</option>
+                                    <option value="geeksforgeeks">GeeksforGeeks</option>
+                                    <option value="hackerrank">HackerRank</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="problem-url">Problem URL</label>
+                                <input type="url" id="problem-url" placeholder="https://leetcode.com/problems/..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="problem-difficulty">Difficulty</label>
+                                <select id="problem-difficulty" required>
+                                    <option value="easy">Easy</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="hard">Hard</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="problem-language">Language</label>
+                                <select id="problem-language" required>
+                                    <option value="py">Python (.py)</option>
+                                    <option value="cpp">C++ (.cpp)</option>
+                                    <option value="java">Java (.java)</option>
+                                    <option value="js">JavaScript (.js)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="solution-code">Your Solution Code</label>
+                            <textarea id="solution-code" placeholder="Paste your clean code solution here..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Log & Generate Sync Command</button>
+                    </form>
+                </div>
+
+                <!-- Sync Command & Code Exporter Output -->
+                <div class="glass-card output-card" id="output-card" style="display: none;">
+                    <div class="output-header">
+                        <h3>Sync Commands</h3>
+                        <span class="success-dot">● Ready</span>
+                    </div>
+                    <p>Run this command locally in your repository to create the commit and generate your green dot:</p>
+                    
+                    <div class="code-box">
+                        <code id="sync-command-text">python sync_challenge.py --title="..." --platform="..."</code>
+                        <button class="btn btn-copy" onclick="copyCommand()">Copy Command</button>
+                    </div>
+
+                    <div class="setup-instructions">
+                        <h4>How to set this up:</h4>
+                        <ol>
+                            <li>Initialize a new, empty repository on GitHub named <code>daily-coding-challenges</code>.</li>
+                            <li>Clone it to your local machine and copy the <code>sync_challenge.py</code> file into its root directory.</li>
+                            <li>Run the copied command in your terminal inside the repository.</li>
+                            <li>Push changes (<code>git push</code>) to update your GitHub graph instantly.</li>
+                        </ol>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script src="stats.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

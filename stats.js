@@ -1,0 +1,15 @@
+window.codestreak_fetched_stats = {
+    "leetcode": {
+        "easy": 35,
+        "medium": 46,
+        "hard": 19,
+        "total": 100
+    },
+    "codechef": {
+        "total": 2
+    },
+    "usernames": {
+        "leetcode": "aditilande08",
+        "codechef": "gaze_doves_04"
+    }
+};
