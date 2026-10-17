@@ -1,17 +1,15 @@
-# Daily Coding Challenges & Learning Tracker ⚡
+# Daily Coding Challenges Tracker ⚡
 
-A repository tracking my daily problem solving and notes. Built with [CodeStreak](index.html).
+A repository tracking my daily problem solving across various platforms. Built with [CodeStreak](index.html).
 
 ## 📊 Summary Statistics
-- **LeetCode**: 0
-- **CodeChef**: 2
+- **LeetCode**: 1
+- **CodeChef**: 0
 - **GeeksforGeeks**: 0
 - **HackerRank**: 0
-- **Today I Learned (TIL)**: 0
 
-## 🏆 Activity Log
+## 🏆 Problem Log
 
-| Date | Platform | Title | Difficulty / Topic | Solution / Note Link |
-|------|----------|-------|--------------------|----------------------|
-| 2026-08-24 | Codechef | [Ballon Splash](https://www.codechef.com/problems/P1209) | Easy | [Link](solutions/codechef/easy/ballon_splash.cpp) |
-| 2026-06-27 | Codechef | [ALL Products](https://www.codechef.com/practice/course/sql-case-studies-topic-wise/SQLBP01/problems/SQLPBP11) | Easy | [Link](solutions/codechef/easy/all_products.js) |
+| Date | Platform | Title | Difficulty | Solution Link |
+|------|----------|-------|------------|---------------|
+| 2026-10-17 | Leetcode | [Customer Who Visited but Did Not Make Any Transactions](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/) | Easy | [Solution](solutions/leetcode/easy/customer_who_visited_but_did_not_make_any_transactions.sql) |
