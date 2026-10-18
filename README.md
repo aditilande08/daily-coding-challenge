@@ -3,7 +3,7 @@
 A repository tracking my daily problem solving across various platforms. Built with [CodeStreak](index.html).
 
 ## 📊 Summary Statistics
-- **LeetCode**: 15
+- **LeetCode**: 16
 - **CodeChef**: 0
 - **GeeksforGeeks**: 0
 - **HackerRank**: 0
@@ -12,6 +12,7 @@ A repository tracking my daily problem solving across various platforms. Built w
 
 | Date | Platform | Title | Difficulty | Solution Link |
 |------|----------|-------|------------|---------------|
+| 2026-10-18 | Leetcode | [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/) | Medium | [Solution](solutions\leetcode\medium\maximum_subarray.py) |
 | 2026-10-18 | Leetcode | [Binary Search](https://leetcode.com/problems/binary-search/) | Easy | [Solution](solutions\leetcode\easy\binary_search.py) |
 | 2026-10-18 | Leetcode | [Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/) | Easy | [Solution](solutions\leetcode\easy\invert_binary_tree.py) |
 | 2026-10-18 | Leetcode | [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) | Easy | [Solution](solutions\leetcode\easy\valid_palindrome.py) |
