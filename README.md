@@ -3,7 +3,7 @@
 A repository tracking my daily problem solving across various platforms. Built with [CodeStreak](index.html).
 
 ## 📊 Summary Statistics
-- **LeetCode**: 10
+- **LeetCode**: 11
 - **CodeChef**: 0
 - **GeeksforGeeks**: 0
 - **HackerRank**: 0
@@ -12,6 +12,7 @@ A repository tracking my daily problem solving across various platforms. Built w
 
 | Date | Platform | Title | Difficulty | Solution Link |
 |------|----------|-------|------------|---------------|
+| 2026-10-18 | Leetcode | [Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/) | Easy | [Solution](solutions\leetcode\easy\merge_two_sorted_lists.py) |
 | 2026-10-18 | Leetcode | [Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) | Easy | [Solution](solutions\leetcode\easy\valid_parentheses.py) |
 | 2026-10-18 | Leetcode | [Two Sum](https://leetcode.com/problems/two-sum/) | Easy | [Solution](solutions\leetcode\easy\two_sum.py) |
 | 2026-10-17 | Leetcode | [Recyclable and Low Fat Products](https://leetcode.com/problems/recyclable-and-low-fat-products/) | Easy | [Solution](solutions/leetcode/easy/recyclable_and_low_fat_products.sql) |
