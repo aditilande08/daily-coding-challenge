@@ -6,7 +6,7 @@ window.codestreak_fetched_stats = {
         "total": 100
     },
     "codechef": {
-        "total": 2
+        "total": 19
     },
     "usernames": {
         "leetcode": "aditilande08",
