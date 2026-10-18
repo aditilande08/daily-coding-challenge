@@ -3,7 +3,7 @@
 A repository tracking my daily problem solving across various platforms. Built with [CodeStreak](index.html).
 
 ## 📊 Summary Statistics
-- **LeetCode**: 8
+- **LeetCode**: 9
 - **CodeChef**: 0
 - **GeeksforGeeks**: 0
 - **HackerRank**: 0
@@ -12,6 +12,7 @@ A repository tracking my daily problem solving across various platforms. Built w
 
 | Date | Platform | Title | Difficulty | Solution Link |
 |------|----------|-------|------------|---------------|
+| 2026-10-18 | Leetcode | [Two Sum](https://leetcode.com/problems/two-sum/) | Easy | [Solution](solutions\leetcode\easy\two_sum.py) |
 | 2026-10-17 | Leetcode | [Recyclable and Low Fat Products](https://leetcode.com/problems/recyclable-and-low-fat-products/) | Easy | [Solution](solutions/leetcode/easy/recyclable_and_low_fat_products.sql) |
 | 2026-10-17 | Leetcode | [Find Customer Referee](https://leetcode.com/problems/find-customer-referee/) | Easy | [Solution](solutions/leetcode/easy/find_customer_referee.sql) |
 | 2026-10-17 | Leetcode | [Big Countries](https://leetcode.com/problems/big-countries/) | Easy | [Solution](solutions/leetcode/easy/big_countries.sql) |
