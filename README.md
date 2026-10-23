@@ -3,7 +3,7 @@
 A repository tracking my daily problem solving across various platforms. Built with [CodeStreak](index.html).
 
 ## 📊 Summary Statistics
-- **LeetCode**: 18
+- **LeetCode**: 23
 - **CodeChef**: 0
 - **GeeksforGeeks**: 0
 - **HackerRank**: 0
@@ -12,6 +12,11 @@ A repository tracking my daily problem solving across various platforms. Built w
 
 | Date | Platform | Title | Difficulty | Solution Link |
 |------|----------|-------|------------|---------------|
+| 2026-10-23 | Leetcode | [3Sum](https://leetcode.com/problems/3sum/) | Medium | [Solution](solutions/leetcode/medium/three_sum.py) |
+| 2026-10-23 | Leetcode | [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | Medium | [Solution](solutions/leetcode/medium/longest_substring_without_repeating_characters.py) |
+| 2026-10-23 | Leetcode | [Group Anagrams](https://leetcode.com/problems/group-anagrams/) | Medium | [Solution](solutions/leetcode/medium/group_anagrams.py) |
+| 2026-10-23 | Leetcode | [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/) | Easy | [Solution](solutions/leetcode/easy/climbing_stairs.py) |
+| 2026-10-23 | Leetcode | [Valid Anagram](https://leetcode.com/problems/valid-anagram/) | Easy | [Solution](solutions/leetcode/easy/valid_anagram.py) |
 | 2026-10-23 | Leetcode | [Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) | Easy | [Solution](solutions/leetcode/easy/reverse_linked_list.py) |
 | 2026-10-23 | Leetcode | [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/) | Easy | [Solution](solutions/leetcode/easy/contains_duplicate.py) |
 | 2026-10-18 | Leetcode | [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/) | Medium | [Solution](solutions\leetcode\medium\maximum_subarray.py) |
